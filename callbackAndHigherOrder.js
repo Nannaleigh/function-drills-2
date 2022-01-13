@@ -108,7 +108,19 @@ contains(names, 'Colt', result => {
   Hint: you can use a nested for loop to do this.
 */
 
-// CODE HERE
+const uniq = (arr, cb) => {
+  for (let i = 0; i < arr.length; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+          if (arr[i] === arr[j]) {
+              arr.splice(j, 1)
+              j--
+          }
+      }
+  }
+  cb(arr)
+}
+
+  
 
 /*
   Invoke the uniq function, passing in the names array from above and a callback function.
@@ -117,7 +129,7 @@ contains(names, 'Colt', result => {
   'The new names array with all the duplicate items removed is [UNIQARRPARAM].'
 */
 
-// CODE HERE
+uniq(names, uniqArr => console.log('The new names array with all the duplicate items removed is ' + uniqArr))
 
 
 
@@ -127,8 +139,9 @@ contains(names, 'Colt', result => {
   Write a function called each that takes in an array of names and a callback function. 
   For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
 */
+const each = (arr, cb) => arr.forEach((el, i) => cb(el,i))
 
-// CODE HERE 
+
 
 
 /*
@@ -138,7 +151,7 @@ contains(names, 'Colt', result => {
   'The item at index [INDEXPARAM] is [ITEMPARAM].'
 */
 
-// CODE HERE
+each(names,(item, index) => `The item at index ${index} is ${item}.`)
 
 
 ////////// PROBLEM 7 //////////
@@ -171,16 +184,21 @@ var users = [
 ]
 // Do not edit the code above.
 
-// CODE HERE 
+const getUserById = (arr,id,cb) => {
+  for( let i = 0; i < arr.length; i++)
+    if(arr[i].id === id) {
+      return cb(arr[i])
+    }
+}
 
 
 // UNCOMMENT THE FUNCTION CALL BELOW
 // RUN THIS FILE WITH NODE
 // CHECK YOUR ANSWER
 
-// getUserById(users, '16t', user => {
-//   console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address) 
-// })
+getUserById(users, '16t', user => {
+  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address) 
+})
 
 ////////// CHALLENGE //////////
 
@@ -198,7 +216,7 @@ var users = [
   the two parameters together and return the sum.
 */
 
-// CODE HERE
+const addingFactory = x => y => x + y
 
 /*
   Now that you have addingFactory, you can create other
@@ -212,7 +230,7 @@ var users = [
   10 as an arguemnt.
 */
 
-// CODE HERE
+const addTen = addingFactory(10)
 
 /*
   Now the inner function is stored in the addTen variable! 
@@ -224,7 +242,10 @@ var users = [
   to see the different outputs.
 */
 
-// CODE HERE
+addTen(50)
+console.log(addTen(50))
+addTen(100)
+console.log(addTen(100))
 
 /*
   Let's make another function from the addingFactory. 
@@ -237,4 +258,7 @@ var users = [
   to add any number to your favorite number!
 */
 
-// CODE HERE
+const addNumber = addingFactory(7)
+
+addNumber(7)
+console.log(addNumber(7))
