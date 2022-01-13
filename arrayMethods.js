@@ -113,7 +113,6 @@ const newOrders = orders.map(function(elem){
 
 console.log(newOrders)
 
-
 ////////// PROBLEM 6 //////////
 
 // Do not edit the code below.
